@@ -6,7 +6,29 @@ namespace GradeBook
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var book = new Book("John Doe's CS grade book");
+
+            while (true)
+            {
+                var input = ReadInput();
+                if (input == "q")
+                {
+                    break;
+                }
+
+                var grade = double.Parse(input);
+                book.AddGrade(grade);
+            }
+
+            var stats = book.ComputeStatistics();
+
+            Console.WriteLine($"\nLetter grade for '{book.Name}' is {stats.LetterGrade}");
+        }
+
+        private static string ReadInput()
+        {
+            Console.Write("Enter a grade between 0 - 100 (q to quit): ");
+            return Console.ReadLine();
         }
     }
 }
