@@ -50,8 +50,26 @@ namespace GradeBook
             }
 
             stats.AverageGrade = sum / grades.Count;
+            stats.LetterGrade = ComputeLetterGrade(stats.AverageGrade);
 
             return stats;
+        }
+
+        private char ComputeLetterGrade(double averageGrade)
+        {
+            switch (averageGrade)
+            {
+                case var d when d >= 90:
+                    return 'A';
+                case var d when d >= 80:
+                    return 'B';
+                case var d when d >= 70:
+                    return 'C';
+                case var d when d >= 60:
+                    return 'D';
+                default:
+                    return 'F';
+            }
         }
 
         private string name;

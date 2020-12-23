@@ -66,6 +66,21 @@ namespace GradeBook.Tests
             Assert.Equal(50.0, stats.AverageGrade, 1);
         }
 
+        [Theory]
+        [InlineData('D', new[] { 60, 65.5, 75.5 })]
+        [InlineData('B', new[] { 80.5, 90, 85.0 })]
+        [InlineData('C', new[] { 70.0, 70.0, 70.0 })]
+        [InlineData('A', new[] { 90.5, 95.5, 100.0 })]
+        [InlineData('F', new[] { 20.5, 50.5, 100.0 })]
+        public void ComputeStatistics_ShouldCompute_LetterGrade(char letterGrade, double[] grades)
+        {
+            var book = CreateTestBook(grades);
+
+            var stats = book.ComputeStatistics();
+
+            Assert.Equal(letterGrade, stats.LetterGrade);
+        }
+
         private Book CreateTestBook(double[] grades, string name = "")
         {
             var book = new Book(name);
