@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace GradeBook
@@ -23,6 +24,21 @@ namespace GradeBook
             {
                 grades.Add(grade);
             }
+        }
+
+        public Statistics ComputeStatistics()
+        {
+            var stats = new Statistics();
+
+            stats.LowestGrade = double.MaxValue;
+
+            foreach (var grade in grades)
+            {
+                stats.LowestGrade = Math.Min(grade, stats.LowestGrade);
+            }
+
+            return stats;
+
         }
 
         private List<double> grades;

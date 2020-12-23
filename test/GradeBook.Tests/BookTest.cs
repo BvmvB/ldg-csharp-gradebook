@@ -26,5 +26,26 @@ namespace GradeBook.Tests
 
             Assert.Equal(0, book.Grades.Count);
         }
+
+        [Fact]
+        public void ComputeStatistics_ShouldCompute_LowestGrade()
+        {
+            var book = CreateTestBook();
+
+            var stats = book.ComputeStatistics();
+
+            Assert.Equal(10.5, stats.LowestGrade);
+        }
+
+        private Book CreateTestBook()
+        {
+            var book = new Book();
+
+            book.AddGrade(10.5);
+            book.AddGrade(50.5);
+            book.AddGrade(89.6);
+
+            return book;
+        }
     }
 }
