@@ -9,7 +9,7 @@ namespace GradeBook.Tests
         public void Book_ShouldRequireAName()
         {
             var bookName = "John Doe's computer science book";
-            var book = CreateTestBook(bookName);
+            var book = CreateTestBook(grades: new[] { 1.0 }, bookName);
 
             Assert.Equal(bookName, book.Name);
         }
@@ -17,11 +17,11 @@ namespace GradeBook.Tests
         [Fact]
         public void AddGrade_Between_0_and_100_WillSucceed()
         {
-            var book = CreateTestBook();
+            var book = CreateTestBook(grades: new[] { 100.0 });
 
             book.AddGrade(10.1);
 
-            Assert.Equal(4, book.Grades.Count);
+            Assert.Equal(2, book.Grades.Count);
         }
 
         [Theory]
@@ -29,17 +29,17 @@ namespace GradeBook.Tests
         [InlineData(101)]
         public void AddGrade_LowerThen_0_Or_GreaterThen_100_ShouldNotSucceed(double grade)
         {
-            var book = CreateTestBook();
+            var book = CreateTestBook(grades: new[] { 100.0 });
 
             book.AddGrade(grade);
 
-            Assert.Equal(3, book.Grades.Count);
+            Assert.Equal(1, book.Grades.Count);
         }
 
         [Fact]
         public void ComputeStatistics_ShouldCompute_LowestGrade()
         {
-            var book = CreateTestBook();
+            var book = CreateTestBook(new[] { 10.5, 55.5, 89.9 });
 
             var stats = book.ComputeStatistics();
 
@@ -49,7 +49,7 @@ namespace GradeBook.Tests
         [Fact]
         public void ComputeStatistics_ShouldCompute_HighestGrade()
         {
-            var book = CreateTestBook();
+            var book = CreateTestBook(new[] { 89.6, 78.5, 50.5 });
 
             var stats = book.ComputeStatistics();
 
@@ -59,20 +59,21 @@ namespace GradeBook.Tests
         [Fact]
         public void ComputeStatistics_ShouldCompute_AverageGrade()
         {
-            var book = CreateTestBook();
+            var book = CreateTestBook(grades: new[] { 50.0, 50.0, 50.0 });
 
             var stats = book.ComputeStatistics();
 
-            Assert.Equal(53.6, stats.AverageGrade, 1);
+            Assert.Equal(50.0, stats.AverageGrade, 1);
         }
 
-        private Book CreateTestBook(string name = "")
+        private Book CreateTestBook(double[] grades, string name = "")
         {
             var book = new Book(name);
 
-            book.AddGrade(10.5);
-            book.AddGrade(60.7);
-            book.AddGrade(89.6);
+            foreach (var grade in grades)
+            {
+                book.AddGrade(grade);
+            }
 
             return book;
         }
