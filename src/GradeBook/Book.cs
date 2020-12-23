@@ -5,11 +5,19 @@ namespace GradeBook
 {
     public class Book
     {
-        public Book()
+        public Book(string name)
         {
+            this.name = name;
             this.grades = new List<double>();
         }
 
+        public string Name
+        {
+            get
+            {
+                return this.name;
+            }
+        }
         public List<double> Grades
         {
             get
@@ -46,6 +54,7 @@ namespace GradeBook
             return stats;
         }
 
+        private string name;
         private List<double> grades;
     }
 }

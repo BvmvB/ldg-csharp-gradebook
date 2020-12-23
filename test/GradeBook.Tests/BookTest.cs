@@ -6,13 +6,22 @@ namespace GradeBook.Tests
     public class BookTest
     {
         [Fact]
+        public void Book_ShouldRequireAName()
+        {
+            var bookName = "John Doe's computer science book";
+            var book = CreateTestBook(bookName);
+
+            Assert.Equal(bookName, book.Name);
+        }
+
+        [Fact]
         public void AddGrade_Between_0_and_100_WillSucceed()
         {
-            var book = new Book();
+            var book = CreateTestBook();
 
             book.AddGrade(10.1);
 
-            Assert.Equal(1, book.Grades.Count);
+            Assert.Equal(4, book.Grades.Count);
         }
 
         [Theory]
@@ -20,11 +29,11 @@ namespace GradeBook.Tests
         [InlineData(101)]
         public void AddGrade_LowerThen_0_Or_GreaterThen_100_ShouldNotSucceed(double grade)
         {
-            var book = new Book();
+            var book = CreateTestBook();
 
             book.AddGrade(grade);
 
-            Assert.Equal(0, book.Grades.Count);
+            Assert.Equal(3, book.Grades.Count);
         }
 
         [Fact]
@@ -57,9 +66,9 @@ namespace GradeBook.Tests
             Assert.Equal(53.6, stats.AverageGrade, 1);
         }
 
-        private Book CreateTestBook()
+        private Book CreateTestBook(string name = "")
         {
-            var book = new Book();
+            var book = new Book(name);
 
             book.AddGrade(10.5);
             book.AddGrade(60.7);
