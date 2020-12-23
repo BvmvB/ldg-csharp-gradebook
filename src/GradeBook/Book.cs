@@ -30,15 +30,20 @@ namespace GradeBook
         {
             var stats = new Statistics();
 
+            var sum = 0.0;
             stats.LowestGrade = double.MaxValue;
+            stats.HighestGrade = double.MinValue;
 
             foreach (var grade in grades)
             {
+                sum += grade;
                 stats.LowestGrade = Math.Min(grade, stats.LowestGrade);
+                stats.HighestGrade = Math.Max(grade, stats.HighestGrade);
             }
 
-            return stats;
+            stats.AverageGrade = sum / grades.Count;
 
+            return stats;
         }
 
         private List<double> grades;

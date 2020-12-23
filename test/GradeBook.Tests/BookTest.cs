@@ -37,12 +37,32 @@ namespace GradeBook.Tests
             Assert.Equal(10.5, stats.LowestGrade);
         }
 
+        [Fact]
+        public void ComputeStatistics_ShouldCompute_HighestGrade()
+        {
+            var book = CreateTestBook();
+
+            var stats = book.ComputeStatistics();
+
+            Assert.Equal(89.6, stats.HighestGrade);
+        }
+
+        [Fact]
+        public void ComputeStatistics_ShouldCompute_AverageGrade()
+        {
+            var book = CreateTestBook();
+
+            var stats = book.ComputeStatistics();
+
+            Assert.Equal(53.6, stats.AverageGrade, 1);
+        }
+
         private Book CreateTestBook()
         {
             var book = new Book();
 
             book.AddGrade(10.5);
-            book.AddGrade(50.5);
+            book.AddGrade(60.7);
             book.AddGrade(89.6);
 
             return book;
