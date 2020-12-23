@@ -33,7 +33,7 @@ namespace GradeBook.Tests
 
             book.AddGrade(grade);
 
-            Assert.Equal(1, book.Grades.Count);
+            Assert.Single(book.Grades);
         }
 
         [Fact]
