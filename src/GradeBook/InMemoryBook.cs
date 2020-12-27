@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace GradeBook
 {
-    public class Book
+    public class InMemoryBook : IBook
     {
-        public Book(string name)
+        public InMemoryBook(string name)
         {
             this.Name = name;
             this.grades = new List<double>();

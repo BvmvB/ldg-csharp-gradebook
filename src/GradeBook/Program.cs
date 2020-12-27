@@ -6,7 +6,7 @@ namespace GradeBook
     {
         static void Main(string[] args)
         {
-            var book = new Book("John Doe's CS grade book");
+            var book = new InMemoryBook("John Doe's CS grade book");
 
             while (true)
             {

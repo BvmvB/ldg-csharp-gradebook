@@ -81,9 +81,9 @@ namespace GradeBook.Tests
             Assert.Equal(letterGrade, stats.LetterGrade);
         }
 
-        private Book CreateTestBook(double[] grades, string name = "")
+        private InMemoryBook CreateTestBook(double[] grades, string name = "")
         {
-            var book = new Book(name);
+            var book = new InMemoryBook(name);
 
             foreach (var grade in grades)
             {
