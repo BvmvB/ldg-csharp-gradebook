@@ -8,28 +8,26 @@ namespace GradeBook
         {
             GradesSum = 0.0;
             GradesCount = 0;
-            AverageGrade = 0;
             LowestGrade = double.MaxValue;
             HighestGrade = double.MinValue;
-            LetterGrade = ComputeLetterGrade(AverageGrade);
         }
 
-        public char LetterGrade { get; private set; }
         public double LowestGrade { get; private set; }
         public double HighestGrade { get; private set; }
-        public double AverageGrade { get; private set; }
+        public char LetterGrade { get { return ComputeLetterGrade(AverageGrade); } }
+        public double AverageGrade { get { return GradesCount != 0 ? GradesSum / GradesCount : 0; } }
 
         public void OnGradeAdded(double grade)
         {
             GradesCount += 1;
             GradesSum += grade;
 
-            AverageGrade = GradesSum / GradesCount;
             LowestGrade = Math.Min(LowestGrade, grade);
             HighestGrade = Math.Max(HighestGrade, grade);
-            LetterGrade = ComputeLetterGrade(AverageGrade);
         }
 
+        private int GradesCount { get; set; }
+        private double GradesSum { get; set; }
         private char ComputeLetterGrade(double averageGrade)
         {
             switch (averageGrade)
@@ -46,7 +44,5 @@ namespace GradeBook
                     return 'F';
             }
         }
-        private int GradesCount { get; set; }
-        private double GradesSum { get; set; }
     }
 }
