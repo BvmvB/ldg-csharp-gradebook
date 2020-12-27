@@ -30,9 +30,6 @@ namespace GradeBook
             LetterGrade = ComputeLetterGrade(AverageGrade);
         }
 
-
-
-
         private char ComputeLetterGrade(double averageGrade)
         {
             switch (averageGrade)
