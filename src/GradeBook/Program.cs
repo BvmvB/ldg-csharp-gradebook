@@ -20,7 +20,7 @@ namespace GradeBook
                 book.AddGrade(grade);
             }
 
-            var stats = book.ComputeStatistics();
+            var stats = book.Statistics;
 
             Console.WriteLine($"\nLetter grade for '{book.Name}' is {stats.LetterGrade}");
         }

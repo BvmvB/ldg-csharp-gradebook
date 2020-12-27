@@ -41,7 +41,7 @@ namespace GradeBook.Tests
         {
             var book = CreateTestBook(new[] { 10.5, 55.5, 89.9 });
 
-            var stats = book.ComputeStatistics();
+            var stats = book.Statistics;
 
             Assert.Equal(10.5, stats.LowestGrade);
         }
@@ -51,7 +51,7 @@ namespace GradeBook.Tests
         {
             var book = CreateTestBook(new[] { 89.6, 78.5, 50.5 });
 
-            var stats = book.ComputeStatistics();
+            var stats = book.Statistics;
 
             Assert.Equal(89.6, stats.HighestGrade);
         }
@@ -61,7 +61,7 @@ namespace GradeBook.Tests
         {
             var book = CreateTestBook(grades: new[] { 50.0, 50.0, 50.0 });
 
-            var stats = book.ComputeStatistics();
+            var stats = book.Statistics;
 
             Assert.Equal(50.0, stats.AverageGrade, 1);
         }
@@ -76,7 +76,7 @@ namespace GradeBook.Tests
         {
             var book = CreateTestBook(grades);
 
-            var stats = book.ComputeStatistics();
+            var stats = book.Statistics;
 
             Assert.Equal(letterGrade, stats.LetterGrade);
         }
